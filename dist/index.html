@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="main.js" defer></script>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header>
+      <h1>Todo List</h1>
+      <p>
+        <a
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+          >with Local Storage</a
+        >
+      </p>
+    </header>
+
+    <main>
+      <section id="sidebar">
+        <div id="general">
+          <h2>General</h2>
+          <ul id="general-list">
+            <li class="general all">All todos</li>
+            <li class="general today">Today</li>
+            <li class="general month">This month</li>
+            <li class="general year">This year</li>
+          </ul>
+        </div>
+        <div id="projects">
+          <h2>Categories</h2>
+          <div class="space-between">
+            <ul id="project-list">
+              <li class="new-project hidden">
+                <form>
+                  <span class="exit--new-project">&times;</span>
+                  <input id="project-input" type="text"
+                  name="new-project" minlength="1" placeholder=" "
+                  required/ />
+                  <button>OK</button>
+                </form>
+              </li>
+            </ul>
+            <span id="new-project-span">
+              <p>New Category</p>
+              <button id="create-project" type="button">+</button>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section id="todo-list-display">
+        <ul id="todo-list">
+          <li class="new-todo pop-up hidden">
+            <form class="todo-form">
+              <label for="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                minlength="3"
+                placeholder=" "
+                required
+              />
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority">
+                <option value="high">High</option>
+                <option value="normal" selected>Normal</option>
+                <option value="low">Low</option>
+              </select>
+              <button>OK</button>
+              <span class="exit--new-todo">&times;</span>
+            </form>
+          </li>
+        </ul>
+        <span id="new-todo-span">
+          <p>Add Todo</p>
+          <button id="create-todo" type="button">+</button>
+        </span>
+      </section>
+    </main>
+
+    <footer>Copyright ©2022 - created by FREɄD</footer>
+  </body>
+</html>
