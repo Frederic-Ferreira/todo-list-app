@@ -9,3 +9,7 @@ Todo-List App est une application écrite en vanilla JavaScript, avec l'architec
 L'application a été compilée grâce au module bundler Webpack.
 
 Elle fonctionne avec Local Storage, qui permet de récupérer les données enregistrées par le navigateur du client et ainsi récupérer les todos enregistrés.
+
+# Auteur
+
+L'application a été écrite et désignée à 100% par moi (Frédéric Ferreira).
