@@ -27,6 +27,9 @@ export default class general {
   }
 
   static initEventListeners() {
+    UI.hideShowEventListener();
+    UI.resizeEventListener();
+
     UI.selectedCategoryEventListener();
     UI.todoFormEventListener();
     UI.toggleCheckedEventListener();

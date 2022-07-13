@@ -4,6 +4,9 @@ import projects from './projects';
 import storage from './localStorage';
 import general from './general';
 
+const sidebarBtn = document.getElementById('hide-show');
+const sidebar = document.getElementById('sidebar');
+
 const todoForm = document.querySelector('.todo-form');
 const newTodoLi = document.querySelector('.new-todo');
 const mainTodos = document.getElementById('todo-list');
@@ -23,10 +26,39 @@ const newProjectForm = document.querySelector('.new-project');
 const projectList = document.getElementById('project-list');
 const projectInput = document.getElementById('project-input');
 
+let hide = true;
+
 export default class UI {
   deleteTodo = false;
   deleteProject = false;
   static generalCategory = 'all';
+
+  static hideShowEventListener() {
+    sidebarBtn.addEventListener('click', () => {
+      if (hide === true) {
+        sidebar.style.transform = 'translateX(0%)';
+        sidebarBtn.style.transform = 'rotate(-180deg)';
+      } else {
+        sidebar.style.transform = 'translateX(-100%)';
+        sidebarBtn.style.transform = 'rotate(0deg)';
+      }
+      hide = !hide;
+    });
+  }
+
+  static resizeEventListener() {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 800) {
+        sidebar.style.transform = 'translateX(0%)';
+        sidebarBtn.style.transform = 'rotate(-180deg)';
+        hide = false;
+      } else if (window.innerWidth < 800) {
+        sidebar.style.transform = 'translateX(-100%)';
+        sidebarBtn.style.transform = 'rotate(0deg)';
+        hide = true;
+      }
+    });
+  }
 
   static selectedCategoryEventListener() {
     btnsGeneralDates.forEach((btn) => {

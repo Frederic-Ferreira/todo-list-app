@@ -37,7 +37,7 @@ html {
 
 body {
   @include flexColumn();
-  height: 100vh;
+  max-height: 100vh;
 }
 
 .hidden {
@@ -101,6 +101,7 @@ main {
   flex: 1;
   display: grid !important;
   grid-template-columns: 1fr 4fr;
+  background-color: $first-color;
 }
 
 /* -------------- SIDEBAR ------------- */
@@ -110,9 +111,32 @@ main {
   border: 5px solid $second-color;
   padding: 1.5rem;
   font-family: 'Sora', sans-serif;
+  transform: translateX(0%);
   @include flexColumn();
   gap: 1rem;
   color: black;
+  position: relative;
+  transition: all 0.5s ease;
+
+  #hide-show {
+    @include flexCenter();
+    color: $fourth-color;
+    font-size: 2.5rem;
+    font-weight: 300;
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    right: -3rem;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    z-index: 1000;
+
+    &:hover {
+      cursor: pointer;
+      color: $sixth-color;
+    }
+  }
 
   h2 {
     padding-top: 1rem;
@@ -120,7 +144,7 @@ main {
   }
 
   #general {
-    height: 50%;
+    height: 38vh;
     text-align: center;
     background-color: $second-color;
     border-radius: 10px;
@@ -153,11 +177,14 @@ main {
   }
 
   #projects {
-    height: 50%;
+    height: 40vh;
+    padding: 0 1rem;
     @include flexColumn();
     background-color: $fifth-color;
     align-items: center;
     border-radius: 10px;
+    overflow-y: scroll;
+    position: relative;
 
     .selected-project {
       color: $first-color;
@@ -168,7 +195,6 @@ main {
       display: flex;
       font-size: 1.25rem;
       width: 15rem;
-      padding: 0 1rem;
       transition: all 0.5s ease;
       @include pointer();
 
@@ -188,12 +214,12 @@ main {
     .confirm-delete-project {
       @include flexCenter();
       height: 2rem;
+      padding: 10px;
       width: 50%;
       border-radius: 10px;
       background-color: red !important;
       animation: 0.5s ease delete-project-growth;
       transition: all ease-in-out 0.1s;
-      // margin-bottom: 0.5rem;
 
       &:hover {
         color: white;
@@ -205,14 +231,12 @@ main {
     }
 
     .new-project {
+      display: flex;
+      align-items: center;
       position: relative;
       animation: ease 1s show-up;
 
       .exit--new-project {
-        position: absolute;
-        left: -1rem;
-        font-size: 1.5rem;
-
         &:hover {
           @include pointer();
           color: white;
@@ -225,6 +249,7 @@ main {
 
       input,
       button {
+        margin-bottom: 1rem;
         border: none;
         border-radius: 5px;
       }
@@ -248,7 +273,7 @@ main {
         height: 1.5rem;
         padding-left: 5px;
         margin-left: 5px;
-        width: 80%;
+        width: 72.5%;
       }
     }
 
@@ -256,16 +281,23 @@ main {
       @include pointer();
     }
 
-    .space-between {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    ul {
+      flex-grow: 1;
+      overflow-y: scroll;
     }
 
     #new-project-span {
       @include flexCenter();
+      height: 3rem;
+      width: 100%;
+      margin-top: auto;
       gap: 1rem;
+      padding: 0.5rem 0;
+
+      p {
+        position: relative;
+        top: 0.5rem;
+      }
 
       button {
         height: 2.5rem;
@@ -274,8 +306,6 @@ main {
         border: none;
         border-radius: 50%;
         background-color: $fourth-color;
-        position: relative;
-        top: -0.5rem;
         transition: all 0.3s ease;
 
         &:hover {
@@ -297,17 +327,19 @@ main {
 /* -------------- TODOS ------------- */
 
 #todo-list-display {
+  height: 100%;
+  position: relative;
   border-top: 5px solid $second-color;
   border-bottom: 5px solid $second-color;
   background: $first-color;
-  padding: 5rem;
+  padding: 5vw;
 
   #todo-list {
     @include flexColumn();
     gap: 1rem;
-    height: 100%;
     overflow: hidden;
     align-items: center;
+    height: 100%;
   }
 
   .todo,
@@ -349,9 +381,10 @@ main {
     .span-todo-list {
       display: flex;
       justify-content: space-between;
-      width: 5rem;
+      width: 15%;
       position: relative;
       left: 33px;
+      margin-right: 1rem;
     }
 
     i {
@@ -385,6 +418,10 @@ main {
         height: 2rem;
         border-radius: 5px;
         border: none;
+      }
+
+      input,
+      select {
         padding: 0 0.5rem;
       }
 
@@ -490,8 +527,9 @@ main {
     justify-content: flex-end;
     align-items: center;
     gap: 1rem;
-    position: relative;
-    left: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 
     button {
       font-size: 2.1rem;
@@ -517,7 +555,7 @@ main {
 /* -------------- FOOTER ------------- */
 
 footer {
-  min-height: 2rem;
+  height: 10vh;
   background-color: $third-color;
   color: $first-color;
   font-size: 1.5rem;
@@ -526,6 +564,174 @@ footer {
   align-items: center;
 }
 
+/* -------------- MEDIA QUERIES ------------- */
+
+@media (max-width: 1140px) {
+  #sidebar #projects .project,
+  #sidebar #projects .new-project {
+    max-width: 10rem;
+  }
+
+  #sidebar #projects .new-project input {
+    width: 50%;
+  }
+
+  #sidebar #projects #new-project-span button {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  #todo-list-display .new-todo form {
+    label {
+      font-size: 1rem;
+    }
+
+    input {
+      width: 20%;
+    }
+
+    select {
+      width: 10%;
+    }
+
+    button {
+      width: 2rem;
+    }
+  }
+}
+
+@media (max-width: 980px) {
+  #sidebar h2 {
+    font-size: 1.5rem;
+  }
+
+  #sidebar #general #general-list {
+    font-size: 1.25rem;
+  }
+
+  #sidebar #projects .project {
+    font-size: 1rem;
+  }
+
+  #sidebar #projects #new-project-span p {
+    font-size: 0.75rem;
+  }
+
+  #todo-list-display #new-todo-span {
+    font-size: 1.5rem;
+
+    & button {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  #todo-list-display .todo {
+    .check {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  #todo-list-display {
+    width: 100vw;
+  }
+
+  #sidebar {
+    height: 85vh;
+    transform: translateX(-100%);
+    position: absolute;
+    z-index: 10000;
+  }
+
+  #hide-show {
+    visibility: visible !important;
+  }
+
+  footer {
+    height: 5vh;
+  }
+
+  header {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  header {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  #todo-list-display .todo {
+    .check {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    .span-todo-list {
+      margin-right: 2rem;
+    }
+  }
+  #todo-list-display .delete-request {
+    width: 20%;
+    animation: 0.5s ease delete-growth-2;
+  }
+
+  #todo-list-display .new-todo form {
+    label,
+    input,
+    select {
+      font-size: 0.75rem;
+    }
+
+    button {
+      width: 1.5rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  header {
+    h1 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  #sidebar h2 {
+    font-size: 1.25rem;
+  }
+
+  #sidebar #general #general-list {
+    font-size: 1rem;
+  }
+
+  #sidebar #projects .project {
+    font-size: 0.75rem;
+  }
+}
 /* -------------- ANIMATIONS ------------- */
 
 @keyframes show-up {
@@ -543,6 +749,15 @@ footer {
   }
   100% {
     width: 10%;
+  }
+}
+
+@keyframes delete-growth-2 {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 20%;
   }
 }
 
