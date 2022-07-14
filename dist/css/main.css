@@ -448,6 +448,7 @@ main {
 #todo-list-display .todo h3,
 #todo-list-display .new-todo h3,
 #todo-list-display .modified-todo-form h3 {
+  text-align: center;
   position: relative;
   top: -5px;
 }
